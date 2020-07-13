@@ -113,78 +113,37 @@ namespace TelephoneDiary
         }
 
         private void tBoxSearch_TextChanged(object sender, EventArgs e)
-        {           
+        {
+            string connectionString = "";
             switch (comBoxSearch.Text)
             {
                 case "First Name":
-                    SqlDataAdapter sda = new SqlDataAdapter("Select * from Contacts Where FirstName like '" +
-                        tBoxSearch.Text + "%'", con);
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
-                    dataGridView1.Rows.Clear();
-
-                    foreach (DataRow item in dt.Rows)
-                    {
-                        int n = dataGridView1.Rows.Add();
-                        dataGridView1.Rows[n].Cells[0].Value = item["FirstName"].ToString();
-                        dataGridView1.Rows[n].Cells[1].Value = item["LastName"].ToString();
-                        dataGridView1.Rows[n].Cells[2].Value = item["Mobile"].ToString();
-                        dataGridView1.Rows[n].Cells[3].Value = item[3].ToString();
-                        dataGridView1.Rows[n].Cells[4].Value = item[4].ToString();
-                    }
+                        connectionString = "Select * from Contacts Where FirstName like '" + tBoxSearch.Text + "%'";                    
                     break;
                 case "Last Name":
-                    SqlDataAdapter sda2 = new SqlDataAdapter("Select * from Contacts Where LastName like '" +
-                        tBoxSearch.Text + "%'", con);
-                    DataTable dt2 = new DataTable();
-                    sda2.Fill(dt2);
-                    dataGridView1.Rows.Clear();
-
-                    foreach (DataRow item in dt2.Rows)
-                    {
-                        int n = dataGridView1.Rows.Add();
-                        dataGridView1.Rows[n].Cells[0].Value = item["FirstName"].ToString();
-                        dataGridView1.Rows[n].Cells[1].Value = item["LastName"].ToString();
-                        dataGridView1.Rows[n].Cells[2].Value = item["Mobile"].ToString();
-                        dataGridView1.Rows[n].Cells[3].Value = item[3].ToString();
-                        dataGridView1.Rows[n].Cells[4].Value = item[4].ToString();
-                    }
+                        connectionString = "Select * from Contacts Where LastName like '" + tBoxSearch.Text + "%'";                   
                     break;
                 case "Mobile":
-                    SqlDataAdapter sda3 = new SqlDataAdapter("Select * from Contacts Where Mobile like '" +
-                        tBoxSearch.Text + "%'", con);
-                    DataTable dt3 = new DataTable();
-                    sda3.Fill(dt3);
-                    dataGridView1.Rows.Clear();
-
-                    foreach (DataRow item in dt3.Rows)
-                    {
-                        int n = dataGridView1.Rows.Add();
-                        dataGridView1.Rows[n].Cells[0].Value = item["FirstName"].ToString();
-                        dataGridView1.Rows[n].Cells[1].Value = item["LastName"].ToString();
-                        dataGridView1.Rows[n].Cells[2].Value = item["Mobile"].ToString();
-                        dataGridView1.Rows[n].Cells[3].Value = item[3].ToString();
-                        dataGridView1.Rows[n].Cells[4].Value = item[4].ToString();
-                    }
+                        connectionString = "Select * from Contacts Where Mobile like '" + tBoxSearch.Text + "%'";                    
                     break;
                 case "Category":
-                    SqlDataAdapter sda4 = new SqlDataAdapter("Select * from Contacts Where Category like '" +
-                        tBoxSearch.Text + "%'", con);
-                    DataTable dt4 = new DataTable();
-                    sda4.Fill(dt4);
-                    dataGridView1.Rows.Clear();
-
-                    foreach (DataRow item in dt4.Rows)
-                    {
-                        int n = dataGridView1.Rows.Add();
-                        dataGridView1.Rows[n].Cells[0].Value = item["FirstName"].ToString();
-                        dataGridView1.Rows[n].Cells[1].Value = item["LastName"].ToString();
-                        dataGridView1.Rows[n].Cells[2].Value = item["Mobile"].ToString();
-                        dataGridView1.Rows[n].Cells[3].Value = item[3].ToString();
-                        dataGridView1.Rows[n].Cells[4].Value = item[4].ToString();
-                    }
+                        connectionString = "Select * from Contacts Where Category like '" + tBoxSearch.Text + "%'";                   
                     break;
-            }                       
+            }
+            SqlDataAdapter sda = new SqlDataAdapter(connectionString, con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            dataGridView1.Rows.Clear();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                int n = dataGridView1.Rows.Add();
+                dataGridView1.Rows[n].Cells[0].Value = item["FirstName"].ToString();
+                dataGridView1.Rows[n].Cells[1].Value = item["LastName"].ToString();
+                dataGridView1.Rows[n].Cells[2].Value = item["Mobile"].ToString();
+                dataGridView1.Rows[n].Cells[3].Value = item[3].ToString();
+                dataGridView1.Rows[n].Cells[4].Value = item[4].ToString();
+            }
         }
     }
 }
